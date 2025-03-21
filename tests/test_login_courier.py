@@ -28,7 +28,7 @@ class TestLoginCourier:
         }
         response = ApiMethods.login_courier(login_data)
         assert response.status_code == 404
-        assert response.json().get('message') == ErrorText.LoginErrorText.NON_EXISTENT_ACC_DATA_ERROR_TEXT
+        assert response.json().get('message') == ErrorText.NON_EXISTENT_ACC_DATA_ERROR_TEXT
 
     @allure.story('Авторизация курьера с отсутствующим логином')
     @allure.title('Ошибка авторизации без логина')
@@ -38,7 +38,7 @@ class TestLoginCourier:
         }
         response = ApiMethods.login_courier(login_data)
         assert response.status_code == 400
-        assert response.json().get('message') == ErrorText.LoginErrorText.EMPTY_LOGIN_PASSWORD_FIELD_ERROR_TEXT
+        assert response.json().get('message') == ErrorText.EMPTY_LOGIN_PASSWORD_FIELD_ERROR_TEXT
 
     @allure.story('Авторизация курьера с отсутствующим паролем')
     @allure.title('Ошибка авторизации без пароля')
@@ -48,4 +48,4 @@ class TestLoginCourier:
         }
         response = ApiMethods.login_courier(login_data)
         assert response.status_code == 400
-        assert response.json().get('message') == ErrorText.LoginErrorText.EMPTY_LOGIN_PASSWORD_FIELD_ERROR_TEXT
+        assert response.json().get('message') == ErrorText.EMPTY_LOGIN_PASSWORD_FIELD_ERROR_TEXT

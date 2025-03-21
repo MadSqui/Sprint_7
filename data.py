@@ -39,10 +39,7 @@ def get_order_payload(color):
 }
 
 class ErrorText:
-    class LoginErrorText:
         NON_EXISTENT_ACC_DATA_ERROR_TEXT = 'Учетная запись не найдена'
         EMPTY_LOGIN_PASSWORD_FIELD_ERROR_TEXT = 'Недостаточно данных для входа'
-
-    class RegistrationErrorText:
         NOT_ENOUGH_DATA_TO_REG_ERROR_TEXT = 'Недостаточно данных для создания учетной записи'
         LOGIN_USED_ERROR_TEXT = 'Этот логин уже используется. Попробуйте другой.'

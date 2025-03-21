@@ -8,11 +8,11 @@ class TestCreateCourier:
 
     @allure.story('Регистрация нового курьера')
     @allure.title('Курьер успешно создается')
-    def test_create_courier(self, courier):
-        login, password, first_name = courier
-        assert login is not None
-        assert password is not None
-        assert first_name is not None
+    def test_create_courier(self):
+        data = courier_data()
+        login_pass, response = ApiMethods.register_new_courier_and_return_login_password(data)
+        assert response.status_code == 201
+        assert len(login_pass) == 3
 
     @allure.story('Регистрация нового курьера с существующим логином')
     @allure.title('Невозможно создать курьера с уже существующим логином')
@@ -25,7 +25,7 @@ class TestCreateCourier:
         }
         login_pass, response = ApiMethods.register_new_courier_and_return_login_password(duplicate_data)
         assert response.status_code == 409
-        assert response.json().get('message') == ErrorText.RegistrationErrorText.LOGIN_USED_ERROR_TEXT
+        assert response.json().get('message') == ErrorText.LOGIN_USED_ERROR_TEXT
 
     @allure.story('Регистрация курьера с отсутствующим логином')
     @allure.title('Невозможно создать курьера без логина')
@@ -33,7 +33,7 @@ class TestCreateCourier:
         data = registration_data_without_login()
         login_pass, response = ApiMethods.register_new_courier_and_return_login_password(data)
         assert response.status_code == 400
-        assert response.json().get('message') == ErrorText.RegistrationErrorText.NOT_ENOUGH_DATA_TO_REG_ERROR_TEXT
+        assert response.json().get('message') == ErrorText.NOT_ENOUGH_DATA_TO_REG_ERROR_TEXT
 
     @allure.story('Регистрация курьера с отсутствующим паролем')
     @allure.title('Невозможно создать курьера без пароля')
@@ -41,4 +41,4 @@ class TestCreateCourier:
         data = registration_data_without_password()
         login_pass, response = ApiMethods.register_new_courier_and_return_login_password(data)
         assert response.status_code == 400
-        assert response.json().get('message') == ErrorText.RegistrationErrorText.NOT_ENOUGH_DATA_TO_REG_ERROR_TEXT
+        assert response.json().get('message') == ErrorText.NOT_ENOUGH_DATA_TO_REG_ERROR_TEXT

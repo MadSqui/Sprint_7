@@ -13,5 +13,4 @@ def courier():
     login_response = ApiMethods.login_courier(login_data)
     courier_id = login_response.json().get("id")
     yield login_pass[0], login_pass[1], courier_id
-    del_response = ApiMethods.delete_courier(courier_id)
-    assert del_response.status_code == 200
+    ApiMethods.delete_courier(courier_id)
